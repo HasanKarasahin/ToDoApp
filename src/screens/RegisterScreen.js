@@ -1,46 +1,36 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  StatusBar,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, View, StatusBar} from 'react-native';
 
 import Header from '../components/Header';
 import InputView from '../components/InputView';
 import NavigateText from '../components/NavigateText';
 import NavigateButton from '../components/NavigateButton';
 
-export default class RegisterScreen extends React.Component {
+const RegisterScreen = ({navigation}) => (
+  <>
+    <StatusBar barStyle="dark-content" />
+    <SafeAreaView style={styles.container}>
+      <Header title={'Kayıt'} />
 
-  render() {
-    return (
-      <>
-        <StatusBar barStyle="dark-content" />
-        <SafeAreaView style={styles.container}>
-          <Header title={'Kayıt'} />
+      <View style={styles.bottomSection}>
+        <InputView label={'Kullanıcı Adı'} />
+        <InputView label={'Şifre'} />
+        <InputView label={'Şifre Tekrar'} />
 
-          <View style={styles.bottomSection}>
-            <InputView label={'Kullanıcı Adı'} />
-            <InputView label={'Şifre'} />
-            <InputView label={'Şifre Tekrar'} />
-
-            <NavigateText
-              navigation={this.props.navigation}
-              link={'Login'}
-              title={'Zaten üye misin? Girş yapmak için tıkla..'}
-            />
-            <NavigateButton
-              navigation={this.props.navigation}
-              link={'MainScreen'}
-              title={'Kayıt ol'}
-            />
-          </View>
-        </SafeAreaView>
-      </>
-    );
-  }
-}
+        <NavigateText
+          navigation={navigation}
+          link={'Login'}
+          title={'Zaten üye misin? Girş yapmak için tıkla..'}
+        />
+        <NavigateButton
+          navigation={navigation}
+          link={'MainScreen'}
+          title={'Kayıt ol'}
+        />
+      </View>
+    </SafeAreaView>
+  </>
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -54,3 +44,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+export default RegisterScreen;
