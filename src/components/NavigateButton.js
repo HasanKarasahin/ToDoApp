@@ -3,11 +3,7 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 export default function NavigateButton(props) {
   return (
-    <TouchableOpacity
-      style={styles.loginBtn}
-      onPress={() => {
-        props.navigation.navigate(props.link);
-      }}>
+    <TouchableOpacity style={styles.loginBtn} onPress={props.pressHandle}>
       <Text style={props.style}>{props.title}</Text>
     </TouchableOpacity>
   );

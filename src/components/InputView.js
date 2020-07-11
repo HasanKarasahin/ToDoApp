@@ -9,9 +9,7 @@ export default function InputView(props) {
       <FloatingLabelInput
         label={props.label}
         value={thisValue}
-        onChangeText={(newText) => {
-          setThisValue(newText);
-        }}
+        onChangeText={props.changeText}
       />
     </View>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, View, StatusBar} from 'react-native';
 
 import Header from '../components/Header';
@@ -6,31 +6,55 @@ import InputView from '../components/InputView';
 import NavigateText from '../components/NavigateText';
 import NavigateButton from '../components/NavigateButton';
 
-const LoginScreen = ({navigation}) => (
-  <>
-    <StatusBar barStyle="dark-content" />
+//Config Firebase
+import firebase from 'firebase';
 
-    <SafeAreaView style={styles.container}>
-      <Header title={'Giriş'} />
+const LoginScreen = ({navigation}) => {
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
 
-      <View style={styles.bottomSection}>
-        <InputView label={'Kullanıcı Adı'} inputValue={'test1'} />
-        <InputView label={'Şifre'} />
+  //TODO input kontrolleri,
 
-        <NavigateText
-          navigation={navigation}
-          link={'Register'}
-          title={'Üye olmak için tıklayın..'}
-        />
-        <NavigateButton
-          navigation={navigation}
-          link={'MainScreen'}
-          title={'Giriş'}
-        />
-      </View>
-    </SafeAreaView>
-  </>
-);
+  const pressHandle = () => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        console.log('OK');
+      })
+      .catch((err) => {
+        console.log('Hata Oluştur: B001' + err.message);
+      });
+  };
+
+  return (
+    <>
+      <StatusBar barStyle="dark-content" />
+
+      <SafeAreaView style={styles.container}>
+        <Header title={'Giriş'} />
+
+        <View style={styles.bottomSection}>
+          <InputView
+            label={'E-posta'}
+            changeText={(newText) => setEmail(newText)}
+          />
+          <InputView
+            label={'Şifre'}
+            changeText={(newText) => setPassword(newText)}
+          />
+
+          <NavigateText
+            navigation={navigation}
+            link={'Register'}
+            title={'Üye olmak için tıklayın..'}
+          />
+          <NavigateButton pressHandle={pressHandle} title={'Giriş'} />
+        </View>
+      </SafeAreaView>
+    </>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
