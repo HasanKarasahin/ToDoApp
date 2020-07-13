@@ -20,7 +20,10 @@ const LoginScreen = ({navigation}) => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        console.log('OK');
+        var user = firebase.auth().currentUser;
+        navigation.navigate('MainScreen', {
+          user: user
+        });
       })
       .catch((err) => {
         console.log('Hata Oluştur: B001' + err.message);
