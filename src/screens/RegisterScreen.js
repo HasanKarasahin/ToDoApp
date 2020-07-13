@@ -5,8 +5,8 @@ import Header from '../components/Header';
 import InputView from '../components/InputView';
 import NavigateText from '../components/NavigateText';
 import NavigateButton from '../components/NavigateButton';
+import Snackbar from 'react-native-snackbar';
 
-//Config Firebase
 import firebase from 'firebase';
 
 const RegisterScreen = ({navigation}) => {
@@ -17,6 +17,29 @@ const RegisterScreen = ({navigation}) => {
   //TODO input kontrolleri,
 
   const pressHandle = () => {
+    let errMsj = '';
+    if (!email || !email.trim()) {
+      errMsj = 'E-mail alanı boş\n';
+    }
+    if (!password || !password.trim()) {
+      errMsj += 'Şifre alanı boş\n';
+    }
+    if (!againPassword || !againPassword.trim()) {
+      errMsj += 'Şifre Tekrar alanı boş\n';
+    }
+
+    if (!(password == againPassword)) {
+      errMsj += 'Şifre ve Şifre Tekrarı bilgisi aynı degil.';
+    }
+
+    if (errMsj) {
+      Snackbar.show({
+        text: errMsj,
+        duration: Snackbar.LENGTH_LONG,
+      });
+      return;
+    }
+
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -28,6 +51,12 @@ const RegisterScreen = ({navigation}) => {
         var errorCode = error.code;
         var errorMessage = error.message;
         // ...
+
+        Snackbar.show({
+          text: 'Lütfen girdiginiz bilgileri kontrol ediniz.\n' + error.message,
+          duration: Snackbar.LENGTH_LONG,
+        });
+        return;
       });
   };
 

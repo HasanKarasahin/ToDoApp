@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import InputView from '../components/InputView';
 import NavigateText from '../components/NavigateText';
 import NavigateButton from '../components/NavigateButton';
+import Snackbar from 'react-native-snackbar';
 
 //Config Firebase
 import firebase from 'firebase';
@@ -16,17 +17,37 @@ const LoginScreen = ({navigation}) => {
   //TODO input kontrolleri,
 
   const pressHandle = () => {
+    let errMsj = '';
+    if (!email || !email.trim()) {
+      errMsj = 'E-mail alanı boş';
+    }
+    if (!password || !password.trim()) {
+      errMsj += '\nŞifre alanı boş';
+    }
+
+    if (errMsj) {
+      Snackbar.show({
+        text: errMsj,
+        duration: Snackbar.LENGTH_LONG,
+      });
+      return;
+    }
+
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         var user = firebase.auth().currentUser;
         navigation.navigate('MainScreen', {
-          user: user
+          user: user,
         });
       })
       .catch((err) => {
-        console.log('Hata Oluştur: B001' + err.message);
+        console.log('Hata Oluştu: B001' + err.message);
+        Snackbar.show({
+          text: 'Lütfen girdiginiz bilgileri kontrol ediniz.\n ' + err.message,
+          duration: Snackbar.LENGTH_LONG,
+        });
       });
   };
 
