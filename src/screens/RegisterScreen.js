@@ -44,7 +44,10 @@ const RegisterScreen = ({navigation}) => {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
-        console.log('Eklendi.');
+        Snackbar.show({
+          text: 'Hesap Oluşturuldu.',
+          duration: Snackbar.LENGTH_LONG,
+        });
       })
       .catch(function (error) {
         // Handle Errors here.
