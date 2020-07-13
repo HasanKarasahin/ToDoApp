@@ -4,7 +4,7 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 export default function NavigateButton(props) {
   return (
     <TouchableOpacity style={styles.loginBtn} onPress={props.pressHandle}>
-      <Text style={props.style}>{props.title}</Text>
+      <Text style={styles.text}>{props.title}</Text>
     </TouchableOpacity>
   );
 }
@@ -12,12 +12,16 @@ export default function NavigateButton(props) {
 const styles = StyleSheet.create({
   loginBtn: {
     width: '80%',
-    backgroundColor: '#DA17FF',
+    backgroundColor: '#ffd361',
     borderRadius: 25,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 40,
     marginBottom: 10,
+  },
+  text: {
+    color: '#966817',
+    fontSize: 30,
   },
 });

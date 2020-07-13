@@ -6,7 +6,7 @@ export default function Header(props) {
     <View style={styles.header}>
       <ImageBackground
         style={styles.imageBackground}
-        source={require('../img/header.png')}>
+        source={require('../img/header_turuncu.png')}>
         <Text style={styles.text}>{props.title}</Text>
       </ImageBackground>
     </View>
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   text: {
-    fontSize: 30,
-    color: 'white',
+    fontSize: 40,
+    color: '#965A2C',
   },
 });

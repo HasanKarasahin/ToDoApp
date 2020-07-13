@@ -18,7 +18,7 @@ class FloatingLabelInput extends React.Component {
       left: 0,
       top: -5,
       fontSize: !isFocused ? 20 : 14,
-      color: !isFocused ? '#003f5c' : '#cc222a',
+      color: !isFocused ? '#965A2C' : '#8C3C15',
     };
     return (
       <View style={styles.inputView}>
@@ -30,7 +30,7 @@ class FloatingLabelInput extends React.Component {
             fontSize: 20,
             color: '#000',
             borderBottomWidth: 2,
-            borderBottomColor: !isFocused ? '#555' : '#cc222a',
+            borderBottomColor: !isFocused ? '#965A2C' : '#8C3C15',
           }}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}

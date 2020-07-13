@@ -5,6 +5,7 @@ import AddToDo from '../components/AddToDo';
 import ToDoItem from '../components/ToDoItem';
 import CustomModal from '../components/CustomModal';
 import firebase from 'firebase';
+import Snackbar from 'react-native-snackbar';
 
 var selectedItem = null;
 class MainScreen extends Component {
@@ -32,7 +33,7 @@ class MainScreen extends Component {
 
             const testData = {
               text: item.val().text,
-              key: Math.random().toString(),
+              item_id: item.val().item_id,
             };
 
             newData.push(testData);
@@ -74,14 +75,12 @@ class MainScreen extends Component {
     obj.setState({todos: newData});
   };
 
-  deletePressHandler = (key) => {
-    Alert.alert(key);
-    selectedItem = key;
+  deletePressHandler = (item_id) => {
+    selectedItem = item_id;
     this.setState({modal: true});
   };
 
   toggleModal = () => {
-    console.log('Hayır');
     this.setState({
       modal: false,
     });
@@ -89,23 +88,24 @@ class MainScreen extends Component {
 
   approveModal = () => {
     if (selectedItem) {
-      // this.setState({
-      //   todos:this.state.todos.filter(todo => todo.key != selectedItem)
-      // })
+      this.setState({
+        todos: this.state.todos.filter((todo) => todo.item_id != selectedItem),
+      });
 
-      Alert.alert(selectedItem);
-
-      // var adaRef = firebase.database().ref('/posts/'+this.state.userId+'/'+selectedItem);
-      // adaRef.remove()
-      //     .then(function() {
-      //       console.log("Remove succeeded.")
-      //     })
-      //     .catch(function(error) {
-      //       console.log("Remove failed: " + error.message)
-      //     });
-      //
-      //
-      // Alert.alert('Silindi.');
+      var adaRef = firebase
+        .database()
+        .ref('/posts/' + this.state.userId + '/' + selectedItem);
+      adaRef
+        .remove()
+        .then(function () {
+          Snackbar.show({
+            text: 'Silindi',
+            duration: Snackbar.LENGTH_SHORT,
+          });
+        })
+        .catch(function (error) {
+          Alert.alert('Bir hata oluştu..' + error.message);
+        });
     }
 
     this.setState({
@@ -130,7 +130,7 @@ class MainScreen extends Component {
                 data={this.state.todos}
                 renderItem={({item}) => (
                   <ToDoItem
-                    text={item.item_id}
+                    item={item}
                     deletePressHandler={this.deletePressHandler}
                   />
                 )}

@@ -1,22 +1,25 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  Alert,
+} from 'react-native';
 
-export default function ToDoItem({text, deletePressHandler}) {
-  useEffect(() => {
-    console.log(text);
-  });
-
+export default function ToDoItem({item, deletePressHandler}) {
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.item}>
         <View style={styles.leftPlace}>
-          <Text style={styles.title}>{text}</Text>
-          <Text style={styles.details}>{text}</Text>
+          <Text style={styles.title}>{item.text}</Text>
+          <Text style={styles.details}>{item.item_id}</Text>
         </View>
         <View style={styles.rightPlace}>
           <TouchableOpacity
             activeOpacity={0.5}
-            onPress={() => deletePressHandler(text)}>
+            onPress={() => deletePressHandler(item.item_id.toString())}>
             <Image source={require('../img/delete_remove_20.png')} />
           </TouchableOpacity>
         </View>

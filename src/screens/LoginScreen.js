@@ -32,7 +32,7 @@ const LoginScreen = ({navigation}) => {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar backgroundColor="#FFD361" />
 
       <SafeAreaView style={styles.container}>
         <Header title={'Giriş'} />
@@ -52,7 +52,7 @@ const LoginScreen = ({navigation}) => {
             link={'Register'}
             title={'Üye olmak için tıklayın..'}
           />
-          <NavigateButton pressHandle={pressHandle} title={'Giriş'} />
+          <NavigateButton pressHandle={pressHandle} title={'Giriş Yap'} />
         </View>
       </SafeAreaView>
     </>
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   bottomSection: {
-    flex: 2,
+    flex: 5,
     justifyContent: 'center',
     alignItems: 'center',
   },

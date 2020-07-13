@@ -14,7 +14,7 @@ export default function NavigateText(props) {
 
 const styles = StyleSheet.create({
   forgot: {
-    color: '#000',
+    color: '#965A2C',
     fontSize: 15,
   },
 });
