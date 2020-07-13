@@ -7,6 +7,7 @@ const Stack = createStackNavigator();
 import LoginScreen from './src/screens/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import MainScreen from './src/screens/MainScreen';
+import ToDoDetailsScreen from './src/screens/ToDoDetailsScreen';
 
 //Config Firebase
 import firebase from 'firebase';
@@ -53,6 +54,13 @@ const App: () => React$Node = () => {
             headerShown: false,
           }}
           component={MainScreen}
+        />
+        <Stack.Screen
+          name="ToDoDetailsScreen"
+          options={{
+            headerShown: false,
+          }}
+          component={ToDoDetailsScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -11,7 +11,7 @@ var selectedItem = null;
 class MainScreen extends Component {
   constructor(props) {
     super(props);
-    const {user} = props.route.params;
+    const {user, navigate} = props.route.params;
 
     this.state = {
       todos: [],
@@ -33,6 +33,7 @@ class MainScreen extends Component {
 
             const testData = {
               text: item.val().text,
+              detail: item.val().detail,
               item_id: item.val().item_id,
             };
 
@@ -80,6 +81,15 @@ class MainScreen extends Component {
     this.setState({modal: true});
   };
 
+  detailsPressHandler = (item_id) => {
+    if (item_id) {
+      this.props.navigation.navigate('ToDoDetailsScreen', {
+        item_id: item_id,
+        userId: this.state.userId,
+      });
+    }
+  };
+
   toggleModal = () => {
     this.setState({
       modal: false,
@@ -117,7 +127,7 @@ class MainScreen extends Component {
     return (
       <>
         <SafeAreaView style={styles.container}>
-          <HeaderForMain />
+          <HeaderForMain title={'Hatırlatmalarım'}/>
           <CustomModal
             visible={this.state.modal}
             onApprove={this.approveModal}
@@ -132,6 +142,7 @@ class MainScreen extends Component {
                   <ToDoItem
                     item={item}
                     deletePressHandler={this.deletePressHandler}
+                    detailsPressHandler={this.detailsPressHandler}
                   />
                 )}
                 keyExtractor={(item) => item.item_id}

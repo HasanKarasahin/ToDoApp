@@ -8,13 +8,21 @@ import {
   Alert,
 } from 'react-native';
 
-export default function ToDoItem({item, deletePressHandler}) {
+export default function ToDoItem({
+  item,
+  deletePressHandler,
+  detailsPressHandler,
+}) {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => detailsPressHandler(item.item_id.toString())}>
       <View style={styles.item}>
         <View style={styles.leftPlace}>
           <Text style={styles.title}>{item.text}</Text>
-          <Text style={styles.details}>{item.item_id}</Text>
+          <Text style={styles.details}>
+            {item.detail ? item.detail : 'Henüz detay girilmemiş..'}
+          </Text>
         </View>
         <View style={styles.rightPlace}>
           <TouchableOpacity

@@ -1,10 +1,10 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
-export default function HeaderForMain() {
+export default function HeaderForMain({title}) {
   return (
     <View style={styles.header}>
-      <Text style={styles.title}> Hatırlatmalarım </Text>
+      <Text style={styles.title}> {title} </Text>
     </View>
   );
 }
